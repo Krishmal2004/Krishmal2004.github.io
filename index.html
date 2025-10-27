@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Krishmal Dinidu - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 9999; 
+            overflow: hidden; 
+            color: #fff;
+            font-size: clamp(1em, 6vw, 2em);
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden; 
+        }
+        #page-content {
+            visibility: hidden; 
+            opacity: 0;
+            transition: opacity 0.5s ease-in; 
+        }
+        #page-content.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+        @property --ang {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @property --k0 {
+            syntax: '<number>';
+            initial-value: 0;
+            inherits: true
+        }
+        @property --k1 {
+            syntax: '<number>';
+            initial-value: 0;
+            inherits: true
+        }
+        @property --ang {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false
+        }
+        @property --x {
+            syntax: '<percentage>';
+            initial-value: 0%;
+            inherits: false
+        }
+        @property --y {
+            syntax: '<percentage>';
+            initial-value: 0%;
+            inherits: false
+        }
+        #preloader::after {
+            content: ' ';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 8.5em; 
+            background: 
+                repeating-conic-gradient(from var(--ang) at var(--x) var(--y), 
+                    #00fffc, #fc00ff, #fffc00, #00fffc 33.333%);
+            mix-blend-mode: multiply;
+            animation: a 6s infinite; 
+            animation-name: ang, x, y;
+            animation-timing-function: linear, cubic-bezier(0.75, 0.25, 0.75, 0.25), cubic-bezier(0.25, 0.75, 0.25, 0.75);
+            content: '';
+        }
+
+        @keyframes ang { to { --ang: 1turn } }
+        @keyframes x { 50% { --x: 100% } }
+        @keyframes y { 50% { --y: 100% } }
+        #preloader .load, #preloader .a2d, #preloader .🔴 { 
+            display: grid; 
+        }
+        
+        #preloader .load div, 
+        #preloader .load ::before, 
+        #preloader .load ::after {
+            grid-area: 1/ 1;
+            place-self: center;
+            border-radius: 50%;
+        }
+
+        .load {
+            padding: 8.5em; 
+            background: inherit;
+        }
+
+        .a2d {
+            filter: drop-shadow(0 0 0.25em currentcolor) blur(1px);
+            animation: r 3s linear infinite; 
+        }
+
+        @keyframes r { to { transform: rotate(1turn) } }
+
+        .🔴 {
+            --not-i: calc(1 - var(--i));
+            --sgn-i: calc(2*var(--i) - 1);
+            --full: linear-gradient(currentcolor, currentcolor);
+            margin-top: calc(var(--sgn-i) * 4.25em); 
+            border: solid 1.25em transparent; 
+            padding: 0.25em; 
+            width: 2.5em; height: 2.5em; 
+            transform: 
+                rotate(calc(var(--not-i)*.5turn)) 
+                scalex(var(--sgn-i));
+            background: 
+                var(--full) content-box, 
+                conic-gradient(
+                    transparent calc(var(--k0)*100%), 
+                    currentcolor 0%  calc(var(--k1)*100%), 
+                    transparent 0%) border-box;
+            mask:
+                var(--full) content-box, 
+                var(--full) padding-box, 
+                var(--full);
+            mask-composite: exclude;
+            animation: a 1.5s linear calc(var(--not-i)*-0.75s) infinite;
+            animation-name: k0, k1;
+        }
+
+        .🔴::before, .🔴::after {
+            width: 1.25em; height: 1.25em; 
+            transform: 
+                rotate(calc(var(--k, var(--k0, 0))*1turn)) 
+                translatey(-2.125em); 
+            opacity: calc(1000*(var(--k1) - var(--k0)));
+            background: currentcolor;
+            content: '';
+        }
+        
+        .🔴::after { --k: var(--k1, 0.35) }
+
+        @keyframes k0 {
+            0%, 25% { --k0: 0 }
+            50% { --k0: 0.65 }
+            75%, 100% { --k0: 1 }
+        }
+
+        @keyframes k1 {
+            0% { --k1: 0 }
+            25% { --k1: 0.35 }
+            50%, 100% { --k1: 1 }
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #010201, #141d2c, #010201);
+            color: #333;
+            margin: 0;
+            padding: 0%;
+        }
+        .topnav {
+            position: sticky;
+            background: rgb(255,255,255,0.15);
+            backdrop-filter: blur(2px) saturate(180%);
+            border: 1px solid rgb(255, 255, 255,0.8);
+            border-radius: 2.5rem;
+            box-shadow: 0 8px 32px rgb(31, 38, 135, 0.2), inset 0 4px 20px rgb(255,255,255,0.3);
+            max-width: 960px;
+            width: 33%;
+            margin: 20px auto;
+            padding: 0 25px;
+            /*display: flex;*/
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;   
+            box-sizing: border-box;
+        }
+        .topnav::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(255, 255, 255,0.1);
+            border-radius: 2rem;
+            backdrop-filter: blur(1px);
+            box-shadow: inset -10px -8px 0px -11px rgb(255, 255, 255, 1), inset 0px -9px 0px -8px rgb(255, 255, 255,1);
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+        }
+        .topnav a {
+            color: #ffffff; 
+            text-decoration: none;
+            padding: 20px 16px; 
+            display: block; 
+            font-weight: bold;
+            font-size: 0.9em;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        .bubble-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255,255,255,0.35);
+            backdrop-filter: blur(5px) saturate(180%);
+            border-radius: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2),inset 0 -3px 0px 0px rgba(255,255,255,0.8),inset 0 4px 0px 0px rgba(0,0,0,0.1);
+            z-index: 0;
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .topnav a:hover,
+        .topnav a.active {
+            color: #333333;
+            text-decoration: none;
+        }
+        .topnav .logo {
+            font-size: 1.2em;
+            text-decoration: none; 
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            position: relative;
+        }
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-wrap: wrap; 
+                justify-content: center; 
+                padding: 10px; 
+                height: auto; 
+                overflow: visible;
+            }
+            .topnav .logo {
+                width: 100%; 
+                text-align: center; 
+                margin-bottom: 5px; 
+            }
+            .nav-links {
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
+            .bubble-effect {
+                display: none;
+            }
+            .body-content {
+                padding: 10px; 
+                margin: 20px auto;
+                width: 90%; 
+            }
+            .heading-main {
+                font-size: 2.2em; 
+            }
+            .welcome-text span {
+                font-size: 1.1em;
+            }
+            .description {
+                font-size: 1em; 
+            }
+            .social-media-icon a {
+                font-size: 1.5em; 
+                margin: 0 10px;
+            }
+        }
+        .body-content {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .welcome-text span {
+            background: radial-gradient(circle, #FF0000 10%, #FF7300 20%, #FFFB00 40%, #48FF00 60%, #002BFF 100%);
+            padding: 20px;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-size: 200%;
+            animation: gradient 2s linear infinite alternate;
+            font-size: 2rem;
+            
+        }
+        .heading-main {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        .name-highlight {
+            background: radial-gradient(circle, #FF0000 10%, #FF7300 20%, #FFFB00 40%, #48FF00 60%, #002BFF 100%);
+            padding: 20px;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-size: 200%;
+            animation: gradient 2s linear infinite alternate;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 100%;
+            }
+        }
+        .description {
+            font-size: 1.1em;
+            color: #444;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.6;
+        }
+        .past-version-button button {
+            padding: 15px 40px;
+            border: none;
+            outline: none;
+            color: whitesmoke;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 12px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5); 
+        }
+        .past-version-button button::after {
+            content: " ";
+            z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #333; 
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .past-version-button button::before {
+            content: " ";
+            background: linear-gradient(
+                45deg,
+                #FF0000, #FF7300, #FFFB00, #48FF00,
+                #00FFD5, #002BFF, #FF00C8, #FF0000
+            );
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 600%;
+            z-index: -2; 
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            filter: blur(10px); 
+            animation: glowing 20s linear infinite;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+            opacity: 1; 
+        }
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        .past-version-button button:hover::before {
+            opacity: 1; 
+        }
+        .past-version-button button:hover::after {
+            background-color: transparent; 
+        }
+        .past-version-button button:active::after {
+            background: transparent;
+        }
+        .past-version-button button:active {
+            color: #000;
+            font-weight: bold;
+        }
+        .social-media-icon {
+            margin-top: 40px;
+        }
+        .social-media-icon a i{
+            font-size: 2em;
+            color: #333;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+            animation: pluse-glow-text 2.5s ease-in-out infinite alternate;
+        }
+        .social-media-icon a:hover {
+            color: #00aaff;
+            animation: none;
+            text-shadow: 0 0 15px #00aaff, 0 0 25px #00aaff;
+        }
+        @keyframes pluse-glow-text{
+            from {
+                text-shadow: 0 0 rgba(255,255,255,0.7), 0 0 12px rgba(255,255,255,0.7);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(0,170,255,0.9), 0 0 25px rgba(0,170,255,0.9);
+            }
+        }
+        .social-media-icon a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="load">
+            <div class="a2d">
+                <div class="🔴" style="--i: 0"></div>
+                <div class="🔴" style="--i: 1"></div>
+            </div>
+        </div>
+    </div> 
+    
+    <div id="page-content">
+        <nav class="topnav" id="myTopnav">
+            <div class="nav-links">
+                <div class="bubble-effect"></div>
+                <a class="active" href="index.html">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#projects">PROJECTS</a>
+                <a href="#skills">SKILLS</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </nav>
+        <div class="body-content">
+            <p class="welcome-text">
+                <span>Welcome to My Portfolio 2.0</span>
+            </p>
+            <h1 class="heading-main">
+                Hi, I'm 
+                <span class="name-highlight">Krishmal</span>
+            </h1>
+            <br> 
+            <p class="description">
+                Developing next-generation AI System with focus on deep learning, reinforcement
+                learning, and natural language processing.
+            </p>
+            <div class="past-version-button">
+                <button type="button" onclick="window.location.href='https://krishmal.qzz.io'">
+                    Go to Portfolio 1.0
+                </button>
+            </div>
+            <div class="social-media-icon">
+                <a href="https://github.com/Krishmal2004" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/krishmal-dinidu-a933b4349" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://learn.microsoft.com/en-us/users/krishmal-0570/" target="_blank">
+                    <i class="fab fa-microsoft"></i>
+                </a>
+            </div>
+        </div>
+    </div> 
+    
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                const pageContent = document.getElementById('page-content');
+                preloader.classList.add('hidden');
+                pageContent.classList.add('visible');
+            }, 1500);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth > 768) {
+                const links = document.querySelectorAll('.nav-links a');
+                const bubble = document.querySelector('.bubble-effect');
+                const activeLink = document.querySelector('.nav-links a.active');
+                const navLinksContainer = document.querySelector('.nav-links');
+                if (!bubble || !activeLink) {
+                    return;
+                }
+
+                function moveBubble(targetLink) {
+                    const left = targetLink.offsetLeft;
+                    const width = targetLink.offsetWidth;
+                    bubble.style.left = `${left}px`;
+                    bubble.style.width = `${width}px`;
+                }
+
+                moveBubble(activeLink);
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', () => {
+                        moveBubble(link);
+                    });
+                });
+
+                navLinksContainer.addEventListener('mouseleave', () => {
+                    // There was a typo here, changed "moveBubb" to "moveBubble"
+                    moveBubble(activeLink); 
+                });
+            }
+        });
+    </script>
+</body>
+</html>
