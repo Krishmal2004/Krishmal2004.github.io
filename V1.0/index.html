@@ -841,6 +841,11 @@
                             <div class="terminal-body">
                                 <form id="contact-form" class="contact-form">
                                     <div class="form-comment">## Initialize New Connection Request</div>
+
+                                    <div id="form-result"
+                                        style="display:none; margin-bottom: 15px; padding: 10px; border: 1px solid #00ffd5; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                                    </div>
+
                                     <div class="input-group">
                                         <label for="name">NAME:</label>
                                         <input type="text" id="name" name="name" required>
@@ -857,7 +862,8 @@
                                         <label for="message">MESSAGE:</label>
                                         <textarea id="message" name="message" rows="5" required></textarea>
                                     </div>
-                                    <button type="submit" class="btn primary-btn">
+
+                                    <button type="submit" id="submitBtn" class="btn primary-btn">
                                         <span class="btn-text">TRANSMIT</span>
                                         <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
                                     </button>
@@ -919,9 +925,10 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 1. Initialize with your Public Key
+            // 1. Initialize with your NEW Public Key
             emailjs.init("zL7dP-8yzWJMUEDQ-");
 
             const contactForm = document.getElementById('contact-form');
@@ -935,32 +942,38 @@
                     // UI Feedback: Loading state
                     const originalBtnText = submitBtn.innerHTML;
                     submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<span></span> TRANSMITTING...';
+                    submitBtn.innerHTML = '<span class="loading-spinner"></span> TRANSMITTING...';
 
-                    // Prepare template parameters matching your EmailJS Template
+                    // Hide any previous messages
+                    formResult.style.display = 'none';
+
+                    // Prepare template parameters
+                    // Make sure these names (from_name, etc.) match your EmailJS Template exactly
                     const templateParams = {
                         from_name: document.getElementById('name').value.trim(),
                         from_email: document.getElementById('email').value.trim(),
                         subject: document.getElementById('subject').value.trim(),
                         message: document.getElementById('message').value.trim(),
-                        to_email: 'infogeneticshub@gmail.com',
                         timestamp: new Date().toLocaleString(),
                         random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
                     };
 
-                    // 2. Send using your Service ID and Template ID
-                    emailjs.send('service_5v2os6b', 'template_ezp24eo', templateParams)
+                    // 2. Replace these with your actual IDs from the EmailJS Dashboard
+                    const serviceID = 'default_service'; // Or your specific Service ID
+                    const templateID = 'template_ezp24eo'; // Your specific Template ID
+
+                    emailjs.send(serviceID, templateID, templateParams)
                         .then(function (response) {
                             console.log('SUCCESS!', response.status, response.text);
 
                             // Reset Form
                             contactForm.reset();
 
-                            // Show Success Message
-                            formResult.textContent = 'Connection established. Message transmitted successfully.';
+                            // Show Success Message with terminal styling
+                            formResult.textContent = '> CONNECTION ESTABLISHED. MESSAGE TRANSMITTED SUCCESSFULLY.';
                             formResult.style.display = 'block';
-                            formResult.style.backgroundColor = 'rgba(0, 255, 100, 0.1)';
                             formResult.style.color = '#00ff66';
+                            formResult.style.backgroundColor = 'rgba(0, 255, 102, 0.1)';
 
                             // Reset Button
                             submitBtn.disabled = false;
@@ -971,10 +984,10 @@
                             console.log('FAILED...', error);
 
                             // Show Error Message
-                            formResult.textContent = 'Transmission failed. Protocol error.';
+                            formResult.textContent = '> TRANSMISSION FAILED. PROTOCOL ERROR: ' + error.text;
                             formResult.style.display = 'block';
-                            formResult.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
                             formResult.style.color = '#ff3333';
+                            formResult.style.backgroundColor = 'rgba(255, 51, 51, 0.1)';
 
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
@@ -983,7 +996,6 @@
             }
         });
     </script>
-
 </body>
 
 </html>
