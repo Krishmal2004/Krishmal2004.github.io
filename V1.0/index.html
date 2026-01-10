@@ -927,10 +927,12 @@
     <script src="script.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 1. Initialize with your NEW Public Key
+        (function() {
+            // 1. Initialize EmailJS with your Public Key
             emailjs.init("zL7dP-8yzWJMUEDQ-");
+        })();
 
+        document.addEventListener('DOMContentLoaded', function () {
             const contactForm = document.getElementById('contact-form');
             const submitBtn = document.getElementById('submitBtn');
             const formResult = document.getElementById('form-result');
@@ -943,12 +945,9 @@
                     const originalBtnText = submitBtn.innerHTML;
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<span class="loading-spinner"></span> TRANSMITTING...';
-
-                    // Hide any previous messages
                     formResult.style.display = 'none';
 
-                    // Prepare template parameters
-                    // Make sure these names (from_name, etc.) match your EmailJS Template exactly
+                    // Capture values exactly as named in your EmailJS Template
                     const templateParams = {
                         from_name: document.getElementById('name').value.trim(),
                         from_email: document.getElementById('email').value.trim(),
@@ -958,37 +957,29 @@
                         random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
                     };
 
-                    // 2. Replace these with your actual IDs from the EmailJS Dashboard
-                    const serviceID = 'service_b4bkd5g'; // Or your specific Service ID
-                    const templateID = 'template_1fjcepl'; // Your specific Template ID
+                    // DEBUG: Check your console (F12) to see if these values are blank
+                    console.log("Payload:", templateParams);
 
-                    emailjs.send(serviceID, templateID, templateParams)
+                    // 2. Send using your verified IDs
+                    emailjs.send('service_b4bkd5g', 'template_1fjcepl', templateParams)
                         .then(function (response) {
                             console.log('SUCCESS!', response.status, response.text);
-
-                            // Reset Form
                             contactForm.reset();
 
-                            // Show Success Message with terminal styling
-                            formResult.textContent = '> CONNECTION ESTABLISHED. MESSAGE TRANSMITTED SUCCESSFULLY.';
+                            formResult.textContent = '> CONNECTION ESTABLISHED. DATA SENT.';
                             formResult.style.display = 'block';
                             formResult.style.color = '#00ff66';
                             formResult.style.backgroundColor = 'rgba(0, 255, 102, 0.1)';
 
-                            // Reset Button
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
-
                             setTimeout(() => { formResult.style.display = 'none'; }, 5000);
                         }, function (error) {
                             console.log('FAILED...', error);
-
-                            // Show Error Message
-                            formResult.textContent = '> TRANSMISSION FAILED. PROTOCOL ERROR: ' + error.text;
+                            formResult.textContent = '> ERROR: ' + error.text;
                             formResult.style.display = 'block';
                             formResult.style.color = '#ff3333';
-                            formResult.style.backgroundColor = 'rgba(255, 51, 51, 0.1)';
-
+                            
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
                         });
