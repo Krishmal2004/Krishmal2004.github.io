@@ -172,278 +172,279 @@
                 </div>
                 <div class="about-content">
                     <div class="about-image">
-                        <canvas id="neuralNetworkCanvas" class="neural-visualization" width="553" height="510" data-user="Krishmal" data-timestamp="2025-06-26 13:54:41"></canvas>
+                        <canvas id="neuralNetworkCanvas" class="neural-visualization" width="553" height="510"
+                            data-user="Krishmal" data-timestamp="2025-06-26 13:54:41"></canvas>
                         <script>
-                        // Neural Network Visualization
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const canvas = document.getElementById('neuralNetworkCanvas');
-                            if (!canvas) return;
-                            
-                            const ctx = canvas.getContext('2d');
-                            const width = canvas.width;
-                            const height = canvas.height;
-                            
-                            // Get user data from canvas attributes
-                            const userData = canvas.getAttribute('data-user') || 'Krishmal';
-                            const timestamp = canvas.getAttribute('data-timestamp') || '2025-06-26 13:54:41';
-                            
-                            // Neural network parameters
-                            const layers = [4, 6, 8, 6, 4]; // Number of neurons per layer
-                            const neurons = [];
-                            const connections = [];
-                            
-                            // Initialize neurons
-                            let layerSpacing = width / (layers.length - 0.5);
-                            layers.forEach((nodeCount, layerIndex) => {
-                                const nodeSpacing = height / (nodeCount + 1);
-                                for (let i = 0; i < nodeCount; i++) {
-                                    neurons.push({
-                                        x: layerIndex * layerSpacing + layerSpacing / 2,
-                                        y: (i + 1) * nodeSpacing,
-                                        layer: layerIndex,
-                                        activation: Math.random(),
-                                        connections: []
-                                    });
-                                }
-                            });
-                            
-                            // Create connections between layers
-                            for (let l = 0; l < layers.length - 1; l++) {
-                                const currentLayerStart = neurons.findIndex(n => n.layer === l);
-                                const nextLayerStart = neurons.findIndex(n => n.layer === l + 1);
-                                
-                                for (let i = 0; i < layers[l]; i++) {
-                                    for (let j = 0; j < layers[l + 1]; j++) {
-                                        const weight = Math.random() * 2 - 1; // Random weight between -1 and 1
-                                        connections.push({
-                                            from: currentLayerStart + i,
-                                            to: nextLayerStart + j,
-                                            weight
+                            // Neural Network Visualization
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const canvas = document.getElementById('neuralNetworkCanvas');
+                                if (!canvas) return;
+
+                                const ctx = canvas.getContext('2d');
+                                const width = canvas.width;
+                                const height = canvas.height;
+
+                                // Get user data from canvas attributes
+                                const userData = canvas.getAttribute('data-user') || 'Krishmal';
+                                const timestamp = canvas.getAttribute('data-timestamp') || '2025-06-26 13:54:41';
+
+                                // Neural network parameters
+                                const layers = [4, 6, 8, 6, 4]; // Number of neurons per layer
+                                const neurons = [];
+                                const connections = [];
+
+                                // Initialize neurons
+                                let layerSpacing = width / (layers.length - 0.5);
+                                layers.forEach((nodeCount, layerIndex) => {
+                                    const nodeSpacing = height / (nodeCount + 1);
+                                    for (let i = 0; i < nodeCount; i++) {
+                                        neurons.push({
+                                            x: layerIndex * layerSpacing + layerSpacing / 2,
+                                            y: (i + 1) * nodeSpacing,
+                                            layer: layerIndex,
+                                            activation: Math.random(),
+                                            connections: []
                                         });
-                                        neurons[currentLayerStart + i].connections.push(connections.length - 1);
                                     }
-                                }
-                            }
-                            
-                            // Animation variables
-                            let pulsePhase = 0;
-                            let dataFlows = [];
-                            
-                            // Create initial data flows
-                            for (let i = 0; i < 10; i++) {
-                                createNewDataFlow();
-                            }
-                            
-                            function createNewDataFlow() {
-                                // Pick a random starting neuron from the first layer
-                                const startIndex = Math.floor(Math.random() * layers[0]);
-                                const startNeuronIndex = neurons.findIndex(n => n.layer === 0) + startIndex;
-                                
-                                dataFlows.push({
-                                    position: { ...neurons[startNeuronIndex] },
-                                    targetNeuron: startNeuronIndex,
-                                    nextTarget: null,
-                                    progress: 0,
-                                    color: `hsl(${180 + Math.random() * 180}, 80%, 60%)`,
-                                    alive: true
                                 });
-                            }
-                            
-                            // Animation loop
-                            function animate() {
-                                // Clear canvas
-                                ctx.clearRect(0, 0, width, height);
-                                
-                                // Draw background gradient
-                                const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
-                                bgGradient.addColorStop(0, 'rgba(0, 10, 20, 0.7)');
-                                bgGradient.addColorStop(1, 'rgba(0, 20, 40, 0.7)');
-                                ctx.fillStyle = bgGradient;
-                                ctx.fillRect(0, 0, width, height);
-                                
-                                // Draw grid lines
-                                ctx.strokeStyle = 'rgba(50, 100, 150, 0.15)';
-                                ctx.lineWidth = 1;
-                                
-                                // Vertical grid lines
-                                for (let x = 0; x < width; x += 20) {
-                                    ctx.beginPath();
-                                    ctx.moveTo(x, 0);
-                                    ctx.lineTo(x, height);
-                                    ctx.stroke();
-                                }
-                                
-                                // Horizontal grid lines
-                                for (let y = 0; y < height; y += 20) {
-                                    ctx.beginPath();
-                                    ctx.moveTo(0, y);
-                                    ctx.lineTo(width, y);
-                                    ctx.stroke();
-                                }
-                                
-                                // Update pulse animation
-                                pulsePhase += 0.02;
-                                
-                                // Draw connections
-                                connections.forEach(conn => {
-                                    const from = neurons[conn.from];
-                                    const to = neurons[conn.to];
-                                    
-                                    // Determine connection color based on weight
-                                    const alpha = Math.abs(conn.weight) * 0.7 + 0.3;
-                                    const hue = conn.weight > 0 ? 190 : 350;
-                                    
-                                    ctx.beginPath();
-                                    ctx.strokeStyle = `hsla(${hue}, 80%, 50%, ${alpha})`;
-                                    ctx.lineWidth = Math.abs(conn.weight) * 2 + 0.5;
-                                    ctx.moveTo(from.x, from.y);
-                                    ctx.lineTo(to.x, to.y);
-                                    ctx.stroke();
-                                });
-                                
-                                // Draw neurons
-                                neurons.forEach((neuron, index) => {
-                                    // Calculate pulse effect
-                                    const pulse = Math.sin(pulsePhase + neuron.x / 30) * 0.3 + 0.7;
-                                    const radius = 4 + neuron.activation * 4 * pulse;
-                                    
-                                    // Draw neuron
-                                    ctx.beginPath();
-                                    const gradient = ctx.createRadialGradient(
-                                        neuron.x, neuron.y, 0,
-                                        neuron.x, neuron.y, radius * 2
-                                    );
-                                    gradient.addColorStop(0, `rgba(150, 220, 255, ${neuron.activation})`);
-                                    gradient.addColorStop(1, 'rgba(70, 130, 230, 0)');
-                                    ctx.fillStyle = gradient;
-                                    ctx.arc(neuron.x, neuron.y, radius * 2, 0, Math.PI * 2);
-                                    ctx.fill();
-                                    
-                                    // Inner core
-                                    ctx.beginPath();
-                                    ctx.fillStyle = `rgba(220, 240, 255, ${neuron.activation * 0.8 + 0.2})`;
-                                    ctx.arc(neuron.x, neuron.y, radius * 0.7, 0, Math.PI * 2);
-                                    ctx.fill();
-                                });
-                                
-                                // Update and draw data flows
-                                dataFlows.forEach((flow, index) => {
-                                    if (!flow.alive) return;
-                                    
-                                    if (flow.nextTarget === null) {
-                                        // Currently at a neuron, decide next target
-                                        const currentNeuron = neurons[flow.targetNeuron];
-                                        
-                                        // Activate the neuron
-                                        currentNeuron.activation = Math.min(1, currentNeuron.activation + 0.3);
-                                        setTimeout(() => {
-                                            currentNeuron.activation = Math.max(0.2, currentNeuron.activation - 0.3);
-                                        }, 200);
-                                        
-                                        // If we're at the last layer, terminate
-                                        if (currentNeuron.layer === layers.length - 1) {
-                                            flow.alive = false;
-                                            setTimeout(() => createNewDataFlow(), Math.random() * 500 + 100);
-                                            return;
+
+                                // Create connections between layers
+                                for (let l = 0; l < layers.length - 1; l++) {
+                                    const currentLayerStart = neurons.findIndex(n => n.layer === l);
+                                    const nextLayerStart = neurons.findIndex(n => n.layer === l + 1);
+
+                                    for (let i = 0; i < layers[l]; i++) {
+                                        for (let j = 0; j < layers[l + 1]; j++) {
+                                            const weight = Math.random() * 2 - 1; // Random weight between -1 and 1
+                                            connections.push({
+                                                from: currentLayerStart + i,
+                                                to: nextLayerStart + j,
+                                                weight
+                                            });
+                                            neurons[currentLayerStart + i].connections.push(connections.length - 1);
                                         }
-                                        
-                                        // Pick a random connection to the next layer
-                                        const possibleConnections = currentNeuron.connections;
-                                        if (possibleConnections.length === 0) {
-                                            flow.alive = false;
-                                            return;
-                                        }
-                                        
-                                        const nextConnection = possibleConnections[Math.floor(Math.random() * possibleConnections.length)];
-                                        const connection = connections[nextConnection];
-                                        flow.nextTarget = connection.to;
-                                        flow.progress = 0;
                                     }
-                                    
-                                    // Move along connection
-                                    const sourceNeuron = neurons[flow.targetNeuron];
-                                    const targetNeuron = neurons[flow.nextTarget];
-                                    flow.progress += 0.03;
-                                    
-                                    if (flow.progress >= 1) {
-                                        // Reached target neuron
-                                        flow.position.x = targetNeuron.x;
-                                        flow.position.y = targetNeuron.y;
-                                        flow.targetNeuron = flow.nextTarget;
-                                        flow.nextTarget = null;
-                                    } else {
-                                        // Interpolate position
-                                        flow.position.x = sourceNeuron.x + (targetNeuron.x - sourceNeuron.x) * flow.progress;
-                                        flow.position.y = sourceNeuron.y + (targetNeuron.y - sourceNeuron.y) * flow.progress;
-                                        
-                                        // Draw data packet
-                                        ctx.beginPath();
-                                        ctx.fillStyle = flow.color;
-                                        ctx.arc(flow.position.x, flow.position.y, 3, 0, Math.PI * 2);
-                                        ctx.fill();
-                                        
-                                        // Draw glow
-                                        ctx.beginPath();
-                                        const glowGradient = ctx.createRadialGradient(
-                                            flow.position.x, flow.position.y, 0,
-                                            flow.position.x, flow.position.y, 8
-                                        );
-                                        glowGradient.addColorStop(0, flow.color);
-                                        glowGradient.addColorStop(1, 'rgba(70, 130, 230, 0)');
-                                        ctx.fillStyle = glowGradient;
-                                        ctx.arc(flow.position.x, flow.position.y, 8, 0, Math.PI * 2);
-                                        ctx.fill();
-                                    }
-                                });
-                                
-                                // Add new data flows occasionally
-                                if (Math.random() < 0.05 && dataFlows.filter(f => f.alive).length < 15) {
+                                }
+
+                                // Animation variables
+                                let pulsePhase = 0;
+                                let dataFlows = [];
+
+                                // Create initial data flows
+                                for (let i = 0; i < 10; i++) {
                                     createNewDataFlow();
                                 }
-                                
-                                // Clean up terminated flows
-                                dataFlows = dataFlows.filter(f => f.alive);
-                                
-                                // Draw circuit board-like decorations
-                                ctx.strokeStyle = 'rgba(100, 200, 255, 0.2)';
-                                ctx.lineWidth = 1;
-                                
-                                // Draw random circuit paths
-                                for (let i = 0; i < 5; i++) {
-                                    ctx.beginPath();
-                                    ctx.moveTo(0, Math.random() * height);
-                                    
-                                    // Create random path
-                                    let x = 0;
-                                    while (x < width) {
-                                        x += Math.random() * 40 + 20;
-                                        const y = Math.random() * height;
-                                        ctx.lineTo(x, y);
-                                    }
-                                    
-                                    ctx.stroke();
+
+                                function createNewDataFlow() {
+                                    // Pick a random starting neuron from the first layer
+                                    const startIndex = Math.floor(Math.random() * layers[0]);
+                                    const startNeuronIndex = neurons.findIndex(n => n.layer === 0) + startIndex;
+
+                                    dataFlows.push({
+                                        position: { ...neurons[startNeuronIndex] },
+                                        targetNeuron: startNeuronIndex,
+                                        nextTarget: null,
+                                        progress: 0,
+                                        color: `hsl(${180 + Math.random() * 180}, 80%, 60%)`,
+                                        alive: true
+                                    });
                                 }
-                                
-                                // Draw user info overlay
-                                ctx.fillStyle = 'rgba(0, 10, 30, 0.7)';
-                                ctx.fillRect(10, height - 50, width - 20, 40);
-                                
-                                ctx.font = '10px "JetBrains Mono", monospace';
-                                ctx.fillStyle = 'rgba(100, 220, 255, 0.9)';
-                                ctx.fillText(`USER: ${userData}`, 15, height - 30);
-                                ctx.fillText(`TIME: ${timestamp}`, 15, height - 15);
-                                
-                                // Add scan line effect
-                                ctx.fillStyle = 'rgba(120, 220, 255, 0.03)';
-                                const scanLineY = (height + Math.sin(Date.now() / 1000) * height/2) % height;
-                                ctx.fillRect(0, scanLineY, width, 2);
-                                
-                                requestAnimationFrame(animate);
-                            }
-                            
-                            // Start animation
-                            animate();
-                        });
+
+                                // Animation loop
+                                function animate() {
+                                    // Clear canvas
+                                    ctx.clearRect(0, 0, width, height);
+
+                                    // Draw background gradient
+                                    const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+                                    bgGradient.addColorStop(0, 'rgba(0, 10, 20, 0.7)');
+                                    bgGradient.addColorStop(1, 'rgba(0, 20, 40, 0.7)');
+                                    ctx.fillStyle = bgGradient;
+                                    ctx.fillRect(0, 0, width, height);
+
+                                    // Draw grid lines
+                                    ctx.strokeStyle = 'rgba(50, 100, 150, 0.15)';
+                                    ctx.lineWidth = 1;
+
+                                    // Vertical grid lines
+                                    for (let x = 0; x < width; x += 20) {
+                                        ctx.beginPath();
+                                        ctx.moveTo(x, 0);
+                                        ctx.lineTo(x, height);
+                                        ctx.stroke();
+                                    }
+
+                                    // Horizontal grid lines
+                                    for (let y = 0; y < height; y += 20) {
+                                        ctx.beginPath();
+                                        ctx.moveTo(0, y);
+                                        ctx.lineTo(width, y);
+                                        ctx.stroke();
+                                    }
+
+                                    // Update pulse animation
+                                    pulsePhase += 0.02;
+
+                                    // Draw connections
+                                    connections.forEach(conn => {
+                                        const from = neurons[conn.from];
+                                        const to = neurons[conn.to];
+
+                                        // Determine connection color based on weight
+                                        const alpha = Math.abs(conn.weight) * 0.7 + 0.3;
+                                        const hue = conn.weight > 0 ? 190 : 350;
+
+                                        ctx.beginPath();
+                                        ctx.strokeStyle = `hsla(${hue}, 80%, 50%, ${alpha})`;
+                                        ctx.lineWidth = Math.abs(conn.weight) * 2 + 0.5;
+                                        ctx.moveTo(from.x, from.y);
+                                        ctx.lineTo(to.x, to.y);
+                                        ctx.stroke();
+                                    });
+
+                                    // Draw neurons
+                                    neurons.forEach((neuron, index) => {
+                                        // Calculate pulse effect
+                                        const pulse = Math.sin(pulsePhase + neuron.x / 30) * 0.3 + 0.7;
+                                        const radius = 4 + neuron.activation * 4 * pulse;
+
+                                        // Draw neuron
+                                        ctx.beginPath();
+                                        const gradient = ctx.createRadialGradient(
+                                            neuron.x, neuron.y, 0,
+                                            neuron.x, neuron.y, radius * 2
+                                        );
+                                        gradient.addColorStop(0, `rgba(150, 220, 255, ${neuron.activation})`);
+                                        gradient.addColorStop(1, 'rgba(70, 130, 230, 0)');
+                                        ctx.fillStyle = gradient;
+                                        ctx.arc(neuron.x, neuron.y, radius * 2, 0, Math.PI * 2);
+                                        ctx.fill();
+
+                                        // Inner core
+                                        ctx.beginPath();
+                                        ctx.fillStyle = `rgba(220, 240, 255, ${neuron.activation * 0.8 + 0.2})`;
+                                        ctx.arc(neuron.x, neuron.y, radius * 0.7, 0, Math.PI * 2);
+                                        ctx.fill();
+                                    });
+
+                                    // Update and draw data flows
+                                    dataFlows.forEach((flow, index) => {
+                                        if (!flow.alive) return;
+
+                                        if (flow.nextTarget === null) {
+                                            // Currently at a neuron, decide next target
+                                            const currentNeuron = neurons[flow.targetNeuron];
+
+                                            // Activate the neuron
+                                            currentNeuron.activation = Math.min(1, currentNeuron.activation + 0.3);
+                                            setTimeout(() => {
+                                                currentNeuron.activation = Math.max(0.2, currentNeuron.activation - 0.3);
+                                            }, 200);
+
+                                            // If we're at the last layer, terminate
+                                            if (currentNeuron.layer === layers.length - 1) {
+                                                flow.alive = false;
+                                                setTimeout(() => createNewDataFlow(), Math.random() * 500 + 100);
+                                                return;
+                                            }
+
+                                            // Pick a random connection to the next layer
+                                            const possibleConnections = currentNeuron.connections;
+                                            if (possibleConnections.length === 0) {
+                                                flow.alive = false;
+                                                return;
+                                            }
+
+                                            const nextConnection = possibleConnections[Math.floor(Math.random() * possibleConnections.length)];
+                                            const connection = connections[nextConnection];
+                                            flow.nextTarget = connection.to;
+                                            flow.progress = 0;
+                                        }
+
+                                        // Move along connection
+                                        const sourceNeuron = neurons[flow.targetNeuron];
+                                        const targetNeuron = neurons[flow.nextTarget];
+                                        flow.progress += 0.03;
+
+                                        if (flow.progress >= 1) {
+                                            // Reached target neuron
+                                            flow.position.x = targetNeuron.x;
+                                            flow.position.y = targetNeuron.y;
+                                            flow.targetNeuron = flow.nextTarget;
+                                            flow.nextTarget = null;
+                                        } else {
+                                            // Interpolate position
+                                            flow.position.x = sourceNeuron.x + (targetNeuron.x - sourceNeuron.x) * flow.progress;
+                                            flow.position.y = sourceNeuron.y + (targetNeuron.y - sourceNeuron.y) * flow.progress;
+
+                                            // Draw data packet
+                                            ctx.beginPath();
+                                            ctx.fillStyle = flow.color;
+                                            ctx.arc(flow.position.x, flow.position.y, 3, 0, Math.PI * 2);
+                                            ctx.fill();
+
+                                            // Draw glow
+                                            ctx.beginPath();
+                                            const glowGradient = ctx.createRadialGradient(
+                                                flow.position.x, flow.position.y, 0,
+                                                flow.position.x, flow.position.y, 8
+                                            );
+                                            glowGradient.addColorStop(0, flow.color);
+                                            glowGradient.addColorStop(1, 'rgba(70, 130, 230, 0)');
+                                            ctx.fillStyle = glowGradient;
+                                            ctx.arc(flow.position.x, flow.position.y, 8, 0, Math.PI * 2);
+                                            ctx.fill();
+                                        }
+                                    });
+
+                                    // Add new data flows occasionally
+                                    if (Math.random() < 0.05 && dataFlows.filter(f => f.alive).length < 15) {
+                                        createNewDataFlow();
+                                    }
+
+                                    // Clean up terminated flows
+                                    dataFlows = dataFlows.filter(f => f.alive);
+
+                                    // Draw circuit board-like decorations
+                                    ctx.strokeStyle = 'rgba(100, 200, 255, 0.2)';
+                                    ctx.lineWidth = 1;
+
+                                    // Draw random circuit paths
+                                    for (let i = 0; i < 5; i++) {
+                                        ctx.beginPath();
+                                        ctx.moveTo(0, Math.random() * height);
+
+                                        // Create random path
+                                        let x = 0;
+                                        while (x < width) {
+                                            x += Math.random() * 40 + 20;
+                                            const y = Math.random() * height;
+                                            ctx.lineTo(x, y);
+                                        }
+
+                                        ctx.stroke();
+                                    }
+
+                                    // Draw user info overlay
+                                    ctx.fillStyle = 'rgba(0, 10, 30, 0.7)';
+                                    ctx.fillRect(10, height - 50, width - 20, 40);
+
+                                    ctx.font = '10px "JetBrains Mono", monospace';
+                                    ctx.fillStyle = 'rgba(100, 220, 255, 0.9)';
+                                    ctx.fillText(`USER: ${userData}`, 15, height - 30);
+                                    ctx.fillText(`TIME: ${timestamp}`, 15, height - 15);
+
+                                    // Add scan line effect
+                                    ctx.fillStyle = 'rgba(120, 220, 255, 0.03)';
+                                    const scanLineY = (height + Math.sin(Date.now() / 1000) * height / 2) % height;
+                                    ctx.fillRect(0, scanLineY, width, 2);
+
+                                    requestAnimationFrame(animate);
+                                }
+
+                                // Start animation
+                                animate();
+                            });
                         </script>
                         <div class="image-overlay"></div>
                         <div class="corner-decorations">
@@ -918,6 +919,71 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. Initialize with your Public Key
+            emailjs.init("In2bcDN19azYfhry1");
+
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submitBtn');
+            const formResult = document.getElementById('form-result');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    // UI Feedback: Loading state
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span></span> TRANSMITTING...';
+
+                    // Prepare template parameters matching your EmailJS Template
+                    const templateParams = {
+                        from_name: document.getElementById('name').value.trim(),
+                        from_email: document.getElementById('email').value.trim(),
+                        subject: document.getElementById('subject').value.trim(),
+                        message: document.getElementById('message').value.trim(),
+                        to_email: 'infogeneticshub@gmail.com',
+                        timestamp: new Date().toLocaleString(),
+                        random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
+                    };
+
+                    // 2. Send using your Service ID and Template ID
+                    emailjs.send('service_5v2os6b', 'template_ezp24eo', templateParams)
+                        .then(function (response) {
+                            console.log('SUCCESS!', response.status, response.text);
+
+                            // Reset Form
+                            contactForm.reset();
+
+                            // Show Success Message
+                            formResult.textContent = 'Connection established. Message transmitted successfully.';
+                            formResult.style.display = 'block';
+                            formResult.style.backgroundColor = 'rgba(0, 255, 100, 0.1)';
+                            formResult.style.color = '#00ff66';
+
+                            // Reset Button
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+
+                            setTimeout(() => { formResult.style.display = 'none'; }, 5000);
+                        }, function (error) {
+                            console.log('FAILED...', error);
+
+                            // Show Error Message
+                            formResult.textContent = 'Transmission failed. Protocol error.';
+                            formResult.style.display = 'block';
+                            formResult.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+                            formResult.style.color = '#ff3333';
+
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                        });
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
