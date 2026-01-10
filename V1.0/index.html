@@ -927,7 +927,7 @@
     <script src="script.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        (function() {
+        (function () {
             // 1. Initialize EmailJS with your Public Key
             emailjs.init("zL7dP-8yzWJMUEDQ-");
         })();
@@ -956,7 +956,6 @@
                         timestamp: new Date().toLocaleString(),
                         random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
                     };
-
                     // DEBUG: Check your console (F12) to see if these values are blank
                     console.log("Payload:", templateParams);
 
@@ -979,7 +978,7 @@
                             formResult.textContent = '> ERROR: ' + error.text;
                             formResult.style.display = 'block';
                             formResult.style.color = '#ff3333';
-                            
+
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
                         });
