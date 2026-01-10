@@ -941,44 +941,41 @@
                 contactForm.addEventListener('submit', function (event) {
                     event.preventDefault();
 
+                    // 1. Use FormData to capture values from the form that triggered the event
+                    const formData = new FormData(event.target);
+
+                    // 2. Map the data to your EmailJS template parameters
+                    const templateParams = {
+                        from_name: formData.get('name').trim(),
+                        from_email: formData.get('email').trim(),
+                        subject: formData.get('subject').trim(),
+                        message: formData.get('message').trim(),
+                        timestamp: new Date().toLocaleString(),
+                        random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
+                    };
+
+                    // Debugging: This will now show the actual values in your console
+                    console.log("Transmission Payload:", templateParams);
+
                     // UI Feedback: Loading state
                     const originalBtnText = submitBtn.innerHTML;
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<span class="loading-spinner"></span> TRANSMITTING...';
-                    formResult.style.display = 'none';
 
-                    // Capture values exactly as named in your EmailJS Template
-                    const templateParams = {
-                        from_name: document.getElementById('name').value.trim(),
-                        from_email: document.getElementById('email').value.trim(),
-                        subject: document.getElementById('subject').value.trim(),
-                        message: document.getElementById('message').value.trim(),
-                        timestamp: new Date().toLocaleString(),
-                        random_id: 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase()
-                    };
-                    // DEBUG: Check your console (F12) to see if these values are blank
-                    console.log("Payload:", templateParams);
-
-                    // 2. Send using your verified IDs
+                    // 3. Send using EmailJS
                     emailjs.send('service_b4bkd5g', 'template_1fjcepl', templateParams)
                         .then(function (response) {
-                            console.log('SUCCESS!', response.status, response.text);
                             contactForm.reset();
-
                             formResult.textContent = '> CONNECTION ESTABLISHED. DATA SENT.';
                             formResult.style.display = 'block';
                             formResult.style.color = '#00ff66';
-                            formResult.style.backgroundColor = 'rgba(0, 255, 102, 0.1)';
-
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
                             setTimeout(() => { formResult.style.display = 'none'; }, 5000);
                         }, function (error) {
-                            console.log('FAILED...', error);
                             formResult.textContent = '> ERROR: ' + error.text;
                             formResult.style.display = 'block';
                             formResult.style.color = '#ff3333';
-
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
                         });
