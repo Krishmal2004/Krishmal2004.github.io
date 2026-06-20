@@ -1286,7 +1286,7 @@
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transmitting...';
 
-                    emailjs.sendForm('service_b4bkd5g', 'template_1fjcepl', this)
+                    emailjs.sendForm('service_pvsqtdk', 'template_1fjcepl', this)
                         .then(function () {
                             formResult.textContent = 'Connection Established. Data Sent Successfully.';
                             formResult.style.display = 'block';
@@ -1297,6 +1297,7 @@
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalBtnText;
                         }, function (error) {
+                            console.error("EmailJS Error Details:", error);
                             formResult.textContent = 'Error: Transmission Failed.';
                             formResult.style.display = 'block';
                             formResult.style.backgroundColor = 'rgba(255, 51, 51, 0.2)';
