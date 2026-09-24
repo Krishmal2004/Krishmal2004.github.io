@@ -4,1329 +4,659 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishmal Dinidu - Engineer the Future</title>
+    <meta name="description"
+        content="Krishmal Dinidu — AI Engineer and Cybersecurity student building intelligent, full-stack systems in Colombo, Sri Lanka.">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:title" content="Krishmal Dinidu - Engineer the Future">
+    <meta property="og:description" content="AI engineering, full-stack products and computer vision.">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23000'/%3E%3Cpath d='M13 9v22M13 22 26 9M18 18l9 13' stroke='%23ef2b3b' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <title>Krishmal Dinidu - Portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Dongle:wght@300;400;700&display=swap');
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-            z-index: 9999;
-            overflow: hidden;
-            color: #fff;
-            font-size: clamp(1em, 6vw, 2em);
-        }
-
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #page-content {
-            position: relative;
-            z-index: 10;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-            width: 100%;
-        }
-
-        #page-content.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        @property --ang {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        @property --k0 {
-            syntax: '<number>';
-            initial-value: 0;
-            inherits: true
-        }
-
-        @property --k1 {
-            syntax: '<number>';
-            initial-value: 0;
-            inherits: true
-        }
-
-        @property --x {
-            syntax: '<percentage>';
-            initial-value: 0%;
-            inherits: false
-        }
-
-        @property --y {
-            syntax: '<percentage>';
-            initial-value: 0%;
-            inherits: false
-        }
-
-        #preloader::after {
-            content: ' ';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            padding: 8.5em;
-            background:
-                repeating-conic-gradient(from var(--ang) at var(--x) var(--y),
-                    #00fffc, #fc00ff, #fffc00, #00fffc 33.333%);
-            mix-blend-mode: multiply;
-            animation: a 6s infinite;
-            animation-name: ang, x, y;
-            animation-timing-function: linear, cubic-bezier(0.75, 0.25, 0.75, 0.25), cubic-bezier(0.25, 0.75, 0.25, 0.75);
-        }
-
-        @keyframes ang {
-            to {
-                --ang: 1turn
-            }
-        }
-
-        @keyframes x {
-            50% {
-                --x: 100%
-            }
-        }
-
-        @keyframes y {
-            50% {
-                --y: 100%
-            }
-        }
-
-        #preloader .load,
-        #preloader .a2d,
-        #preloader .閥 {
-            display: grid;
-        }
-
-        #preloader .load div,
-        #preloader .load ::before,
-        #preloader .load ::after {
-            grid-area: 1/ 1;
-            place-self: center;
-            border-radius: 50%;
-        }
-
-        .load {
-            padding: 8.5em;
-            background: inherit;
-        }
-
-        .a2d {
-            filter: drop-shadow(0 0 0.25em currentcolor) blur(1px);
-            animation: r 3s linear infinite;
-        }
-
-        @keyframes r {
-            to {
-                transform: rotate(1turn)
-            }
-        }
-
-        .閥 {
-            --not-i: calc(1 - var(--i));
-            --sgn-i: calc(2*var(--i) - 1);
-            --full: linear-gradient(currentcolor, currentcolor);
-            margin-top: calc(var(--sgn-i) * 4.25em);
-            border: solid 1.25em transparent;
-            padding: 0.25em;
-            width: 2.5em;
-            height: 2.5em;
-            transform:
-                rotate(calc(var(--not-i)*.5turn)) scalex(var(--sgn-i));
-            background:
-                var(--full) content-box,
-                conic-gradient(transparent calc(var(--k0)*100%),
-                    currentcolor 0% calc(var(--k1)*100%),
-                    transparent 0%) border-box;
-            mask:
-                var(--full) content-box,
-                var(--full) padding-box,
-                var(--full);
-            mask-composite: exclude;
-            animation: a 1.5s linear calc(var(--not-i)*-0.75s) infinite;
-            animation-name: k0, k1;
-        }
-
-        .閥::before,
-        .閥::after {
-            width: 1.25em;
-            height: 1.25em;
-            transform:
-                rotate(calc(var(--k, var(--k0, 0))*1turn)) translatey(-2.125em);
-            opacity: calc(1000*(var(--k1) - var(--k0)));
-            background: currentcolor;
-            content: '';
-        }
-
-        .閥::after {
-            --k: var(--k1, 0.35)
-        }
-
-        @keyframes k0 {
-
-            0%,
-            25% {
-                --k0: 0
-            }
-
-            50% {
-                --k0: 0.65
-            }
-
-            75%,
-            100% {
-                --k0: 1
-            }
-        }
-
-        @keyframes k1 {
-            0% {
-                --k1: 0
-            }
-
-            25% {
-                --k1: 0.35
-            }
-
-            50%,
-            100% {
-                --k1: 1
-            }
-        }
-
-        body {
-            font-family: 'Dongle', sans-serif;
-            background: linear-gradient(to right, #010201, #141d2c, #010201);
-            color: #d1d5db;
-            margin: 0;
-            padding: 0%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-        }
-
-        /* Top Navigation */
-        .topnav {
-            position: sticky;
-            top: 20px;
-            background: rgb(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px) saturate(180%);
-            border: 1px solid rgb(255, 255, 255, 0.4);
-            border-radius: 2.5rem;
-            box-shadow: 0 8px 32px rgb(31, 38, 135, 0.2), inset 0 4px 20px rgb(255, 255, 255, 0.1);
-            max-width: 960px;
-            width: 77%;
-            margin: 20px auto;
-            padding: 0 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            box-sizing: border-box;
-            z-index: 100;
-        }
-
-        .topnav a {
-            color: #ffffff;
-            text-decoration: none;
-            padding: 20px 24px;
-            display: block;
-            font-weight: bold;
-            font-size: 1.2em;
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s ease;
-            font-family: 'Open Sans', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .bubble-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(5px) saturate(180%);
-            border-radius: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 -3px 0px 0px rgba(255, 255, 255, 0.8), inset 0 4px 0px 0px rgba(0, 0, 0, 0.1);
-            z-index: 0;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .topnav a:hover,
-        .topnav a.active {
-            color: #111;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            position: relative;
-        }
-
-        /* Common Section Styles */
-        section {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 40px 20px;
-            text-align: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .section-title {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        .section-subtitle {
-            font-size: 1.5em;
-            color: #aaa;
-            margin-bottom: 40px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .glass-panel {
-            background: rgba(20, 25, 40, 0.4);
-            backdrop-filter: blur(12px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        /* Home Section */
-        .welcome-text span {
-            background: radial-gradient(circle, #FF0000 10%, #FF7300 20%, #FFFB00 40%, #48FF00 60%, #002BFF 100%);
-            padding: 20px;
-            -webkit-background-clip: text;
-            color: transparent;
-            background-size: 200%;
-            animation: gradient 2s linear infinite alternate;
-            font-size: 3.5rem;
-        }
-
-        .heading-main {
-            font-size: 4.5em;
-            margin: 10px 0;
-            color: #fff;
-        }
-
-        .name-highlight {
-            background: radial-gradient(circle, #FF0000 10%, #FF7300 20%, #FFFB00 40%, #48FF00 60%, #002BFF 100%);
-            padding: 20px;
-            -webkit-background-clip: text;
-            color: transparent;
-            background-size: 200%;
-            animation: gradient 2s linear infinite alternate;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0%;
-            }
-
-            100% {
-                background-position: 100%;
-            }
-        }
-
-        .description {
-            font-size: 1.5em;
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.2;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .past-version-button button {
-            padding: 15px 40px;
-            border: none;
-            outline: none;
-            color: whitesmoke;
-            cursor: pointer;
-            position: relative;
-            z-index: 0;
-            border-radius: 12px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: bold;
-        }
-
-        .past-version-button button::after {
-            content: " ";
-            z-index: -1;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #1a1a2e;
-            left: 0;
-            top: 0;
-            border-radius: 10px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .past-version-button button::before {
-            content: " ";
-            background: linear-gradient(45deg, #FF0000, #FF7300, #FFFB00, #48FF00, #00FFD5, #002BFF, #FF00C8, #FF0000);
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            background-size: 600%;
-            z-index: -2;
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
-            filter: blur(10px);
-            animation: glowing 20s linear infinite;
-            border-radius: 10px;
-        }
-
-        @keyframes glowing {
-            0% {
-                background-position: 0 0;
-            }
-
-            50% {
-                background-position: 400% 0;
-            }
-
-            100% {
-                background-position: 0 0;
-            }
-        }
-
-        .past-version-button button:hover::after {
-            background-color: transparent;
-        }
-
-        .past-version-button button:active {
-            color: #000;
-        }
-
-        .social-media-icon {
-            margin-top: 40px;
-        }
-
-        .social-media-icon a i {
-            font-size: 2.5em;
-            color: #fff;
-            margin: 0 15px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            animation: pluse-glow-text 2.5s ease-in-out infinite alternate;
-        }
-
-        .social-media-icon a:hover i {
-            color: #00aaff;
-            animation: none;
-            text-shadow: 0 0 15px #00aaff, 0 0 25px #00aaff;
-            transform: scale(1.1);
-        }
-
-        @keyframes pluse-glow-text {
-            from {
-                text-shadow: 0 0 rgba(255, 255, 255, 0.7), 0 0 12px rgba(255, 255, 255, 0.7);
-            }
-
-            to {
-                text-shadow: 0 0 15px rgba(0, 170, 255, 0.9), 0 0 25px rgba(0, 170, 255, 0.9);
-            }
-        }
-
-        /* About Section */
-        .timeline {
-            font-family: 'Open Sans', sans-serif;
-            margin-top: 30px;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 25px;
-            bottom: -25px;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .timeline-item:last-child::before {
-            display: none;
-        }
-
-        .timeline-dot {
-            width: 16px;
-            height: 16px;
-            background: #00ffd5;
-            border-radius: 50%;
-            margin-right: 20px;
-            margin-top: 5px;
-            box-shadow: 0 0 10px #00ffd5;
-            position: relative;
-            z-index: 2;
-        }
-
-        .timeline-content h4 {
-            margin: 0 0 5px 0;
-            color: #fff;
-            font-size: 1.2em;
-        }
-
-        .timeline-content p {
-            margin: 0;
-            color: #aaa;
-            font-size: 0.9em;
-        }
-
-        .timeline-date {
-            font-weight: bold;
-            color: #00ffd5;
-            font-size: 0.85em;
-            margin-bottom: 5px;
-            display: inline-block;
-            background: rgba(0, 255, 213, 0.1);
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: left;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2);
-            border-color: rgba(0, 170, 255, 0.4);
-        }
-
-        .project-card h3 {
-            color: #fff;
-            margin-top: 0;
-            font-size: 1.4em;
-        }
-
-        .project-card p {
-            color: #aaa;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .tech-tag {
-            background: rgba(255, 255, 255, 0.1);
-            color: #00ffd5;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .skill-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-        }
-
-        .skill-icon i {
-            font-size: 3em;
-            margin-bottom: 10px;
-            background: -webkit-linear-gradient(#00ffd5, #00aaff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .skill-item h4 {
-            margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 1em;
-            color: #eee;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            font-family: 'Open Sans', sans-serif;
-            text-align: left;
-        }
-
-        .contact-info p {
-            font-size: 1.1em;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .contact-info i {
-            color: #00ffd5;
-            margin-right: 10px;
-            width: 20px;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 15px;
-            color: #fff;
-            font-family: 'Open Sans', sans-serif;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: #00ffd5;
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #00aaff, #00ffd5);
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            color: #000;
-            font-weight: bold;
-            font-size: 1em;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* =========================================
-           Responsive Design / Device Scaling 
-           ========================================= */
-
-        /* Tablets and Smaller Laptops */
-        @media screen and (max-width: 1024px) {
-            .topnav {
-                width: 90%;
-            }
-
-            section {
-                padding: 40px 15px;
-            }
-        }
-
-        /* Mobile Phones (Standard) */
-        @media screen and (max-width: 768px) {
-            .topnav {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 10px;
-                height: auto;
-                width: 95%;
-                border-radius: 1.5rem;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            .topnav a {
-                padding: 8px 12px;
-                font-size: 1em;
-            }
-
-            .bubble-effect {
-                display: none;
-            }
-
-            .welcome-text span {
-                font-size: 1.5rem;
-                padding: 10px;
-            }
-
-            .heading-main {
-                font-size: 3em;
-            }
-
-            .description {
-                font-size: 1.2em;
-                padding: 0 10px;
-            }
-
-            .section-title {
-                font-size: 2.5em;
-            }
-
-            .section-subtitle {
-                font-size: 1.2em;
-                margin-bottom: 30px;
-            }
-
-            .glass-panel {
-                padding: 20px;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-            }
-
-            .timeline-dot {
-                width: 12px;
-                height: 12px;
-                margin-right: 15px;
-            }
-
-            .timeline-item::before {
-                left: 5px;
-            }
-        }
-
-        /* Extra Small Devices (Smaller Phones) */
-        @media screen and (max-width: 480px) {
-            .heading-main {
-                font-size: 2.2em;
-            }
-
-            .section-title {
-                font-size: 2em;
-            }
-
-            .topnav a {
-                font-size: 0.9em;
-                padding: 6px 8px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-                gap: 15px;
-            }
-
-            .skill-icon i {
-                font-size: 2.5em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
-    <div id="preloader">
-        <div class="load">
-            <div class="a2d">
-                <div class="閥" style="--i: 0"></div>
-                <div class="閥" style="--i: 1"></div>
-            </div>
+    <!-- ============ LOADER ============ -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-ring">
+            <svg viewBox="0 0 120 120">
+                <circle class="lr-track" cx="60" cy="60" r="52" />
+                <circle class="lr-ticks" cx="60" cy="60" r="44" />
+                <circle class="lr-bar" id="loader-arc" cx="60" cy="60" r="52" />
+            </svg>
+            <svg class="lr-mark" viewBox="0 0 40 40">
+                <path d="M13 9v22M13 22 26 9M18 18l9 13" />
+            </svg>
         </div>
+        <span class="loader-pct mono" id="loader-pct">000%</span>
     </div>
 
-    <div id="page-content">
-        <nav class="topnav" id="myTopnav">
-            <div class="nav-links">
-                <div class="bubble-effect"></div>
-                <a class="active" href="#home">HOME</a>
-                <a href="#about">ABOUT</a>
-                <a href="#projects">PROJECTS</a>
-                <a href="#blogs">BLOGS</a>
-                <a href="#skills">SKILLS</a>
-                <a href="#contact">CONTACT</a>
-            </div>
-        </nav>
+    <!-- ============ TOP BAR ============ -->
+    <header class="topbar" id="topbar">
+        <a href="#home" class="brand">
+            <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M13 9v22M13 22 26 9M18 18l9 13" />
+            </svg>
+            <span>Krishmal Dinidu</span>
+        </a>
+        <div class="topbar-right">
+            <span class="status mono"><i class="status-dot"></i>Open to internships</span>
+            <a href="../V1.0/assets/Krishmal%20Dinidu.pdf" target="_blank" rel="noopener" class="pill">Resume <i
+                    class="fas fa-arrow-up-right-from-square"></i></a>
+        </div>
+    </header>
 
-        <section id="home">
-            <p class="welcome-text">
-                <span>Welcome to My Portfolio 2.0</span>
-            </p>
-            <h1 class="heading-main">
-                Hi, I'm <span class="name-highlight">Krishmal Dinidu</span>
-            </h1>
-            <br>
-            <p class="description">
-                AI Engineer & Cybersecurity Student developing next-generation AI systems with a focus on deep learning,
-                reinforcement learning, and full-stack integration.
-            </p>
-            <div class="past-version-button">
-                <button type="button" onclick="window.location.href='https://krishmal.qzz.io/V1.0/index.html'">
-                    Go to Portfolio 1.0
-                </button>
-            </div>
+    <!-- ============ DOCK ============ -->
+    <nav class="dock" id="dock" aria-label="Sections">
+        <a href="#about" data-tip="About" aria-label="About"><i class="fas fa-rocket"></i></a>
+        <a href="#capabilities" data-tip="Capabilities" aria-label="Capabilities"><i class="fas fa-code"></i></a>
+        <a href="#home" class="dock-logo" data-tip="Home" aria-label="Home">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M13 9v22M13 22 26 9M18 18l9 13" />
+            </svg>
+        </a>
+        <a href="#projects" data-tip="Projects" aria-label="Projects"><i class="fas fa-briefcase"></i></a>
+        <a href="#contact" data-tip="Contact" aria-label="Contact"><i class="fas fa-paper-plane"></i></a>
+    </nav>
 
+    <!-- ============ PROGRESS HUD ============ -->
+    <div class="hud" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+            <circle class="hud-ticks" cx="50" cy="50" r="46" />
+            <circle class="hud-track" cx="50" cy="50" r="38" />
+            <circle class="hud-arc" id="hud-arc" cx="50" cy="50" r="38" />
+            <circle class="hud-core" cx="50" cy="50" r="24" />
+            <g id="hud-needle">
+                <line x1="50" y1="50" x2="50" y2="32" />
+            </g>
+            <circle class="hud-pin" cx="50" cy="50" r="3" />
+        </svg>
+        <span class="hud-label mono">Progress</span>
+        <span class="hud-pct mono" id="hud-pct">000<small>%</small></span>
+    </div>
 
-        </section>
+    <main>
+        <!-- ============ HERO ============ -->
+        <section class="hero" id="home">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <canvas class="globe" id="globe" aria-hidden="true"></canvas>
 
-        <section id="about">
-            <h2 class="section-title">System Specs</h2>
-            <div class="section-subtitle">About the intelligence behind the code</div>
-            <div class="glass-panel">
-                <p style="font-family: 'Open Sans', sans-serif; font-size: 1.1em; color: #ccc; line-height: 1.6;">
-                    I am an Artificial Intelligence Engineer currently pursuing my BSc (Hons) in Artificial
-                    Intelligence. I specialize in bridging the gap between frontier AI models and polished, full-stack
-                    applications. My core focus lies in integrating advanced machine learning architectures, natural
-                    language processing, and computer vision into robust software ecosystems.
+            <h1 class="sr-only">Krishmal Dinidu — AI Engineer. Engineer the future.</h1>
+
+            <div class="hero-inner">
+                <div class="wordmark" aria-hidden="true">KRISHMAL</div>
+                <div class="dot-wrap">
+                    <canvas class="dot-text" id="dot-text" aria-hidden="true"></canvas>
+                    <p class="dot-fallback" aria-hidden="true">ENGINEER THE FUTURE</p>
+                </div>
+                <p class="hero-sub mono">
+                    <span>AI Engineer</span><i>✦</i><span>Full-Stack Developer</span><i>✦</i><span>Colombo, LK</span>
                 </p>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2024 - PRESENT</span>
-                            <h4>University Student</h4>
-                            <p>BSc (Hons) in Information Technology Specializing in Artificial Intelligence</p>
+            </div>
+        </section>
+
+        <!-- ============ ABOUT ============ -->
+        <section class="about section" id="about">
+            <span class="side-label mono"><b>01</b> About</span>
+            <div class="container">
+                <h2 class="headline reveal">Intelligence,<br><span class="dim">engineered into reality.</span></h2>
+
+                <div class="about-grid">
+                    <p class="about-text reveal">
+                        I'm an AI Engineer pursuing a BSc (Hons) in Information Technology, specialising in Artificial
+                        Intelligence. I bridge the gap between frontier models and polished, full-stack products,
+                        bringing machine learning, natural language processing and computer vision into software that
+                        actually ships. I also dig into cybersecurity, DevOps and integration platforms like WSO2.
+                    </p>
+
+                    <dl class="stats">
+                        <div class="stat reveal">
+                            <dt class="mono">Projects shipped</dt>
+                            <dd><span data-count="18">0</span><b>+</b></dd>
                         </div>
+                        <div class="stat reveal">
+                            <dt class="mono">Technologies</dt>
+                            <dd><span data-count="30">0</span><b>+</b></dd>
+                        </div>
+                        <div class="stat reveal">
+                            <dt class="mono">Articles published</dt>
+                            <dd><span data-count="3">0</span></dd>
+                        </div>
+                        <div class="stat reveal">
+                            <dt class="mono">Started BSc (Hons)</dt>
+                            <dd><span data-count="2024" data-from="2000">2024</span></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CAPABILITIES ============ -->
+        <section class="caps" id="capabilities">
+            <div class="caps-pin" id="caps-pin">
+                <span class="side-label mono"><b>02</b> Capabilities</span>
+                <div class="caps-inner container">
+                    <div class="caps-left">
+                        <div class="caps-count mono"><span id="caps-idx">01</span> / <span id="caps-total">06</span>
+                        </div>
+                        <h2 class="caps-title">I can<br>build</h2>
+                        <p class="caps-desc" id="caps-desc">LSTM sentiment models, Gemini-powered insights and data
+                            pipelines - trained, evaluated and wired into real products.</p>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2020-2024</span>
-                            <h4>G.C.E A/L</h4>
-                            <p>Ananda College, Colombo 10</p>
-                            <p>Bio Stream</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2010-2020</span>
-                            <h4>G.C.E O/L</h4>
-                            <p>Dharmapala Vidiyalaya Pannipitiya</p>
-                        </div>
+
+                    <div class="caps-viewport">
+                        <ul class="caps-list" id="caps-list">
+                            <li class="active"
+                                data-desc="LSTM sentiment models, Gemini-powered insights and data pipelines - trained, evaluated and wired into real products.">
+                                AI &amp; ML systems<b>.</b></li>
+                            <li
+                                data-desc="React and Vite front-ends on Express, PostgreSQL and Spring Boot back-ends - like SLTB DepotOps, a live fleet tracker.">
+                                Web platforms<b>.</b></li>
+                            <li
+                                data-desc="React Native and Flutter apps - food reservations with Stripe, real-time chat, weather and API tools.">
+                                Mobile products<b>.</b></li>
+                            <li
+                                data-desc="Hand tracking, gesture control and vision pipelines using MediaPipe and OpenCV.">
+                                Computer vision<b>.</b></li>
+                            <li
+                                data-desc="Tamper-evident signed certificates, JWT auth and locked-down exam browsers - security built in, not bolted on.">
+                                Secure software<b>.</b></li>
+                            <li
+                                data-desc="Docker, Vercel and Supabase deploys, WSO2 and Ballerina integrations, and a Rust TUI that runs whole dev environments.">
+                                Cloud &amp; DevOps<b>.</b></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
-            <h2 class="section-title">Neural Outputs</h2>
-            <div class="section-subtitle">Featured AI Projects & Implementations</div>
-            <div class="projects-grid">
-
-                <div class="project-card">
-                    <h3>WealthWise</h3>
-                    <p>An advanced expense-tracking platform that integrates frontier AI (Gemini 2.5) to provide
-                        personalized financial insights and predictive analytics within a seamless full-stack
-                        architecture.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Gemini 2.5 AI</span>
-                        <span class="tech-tag">Full-Stack</span>
-                        <span class="tech-tag">Data Analytics</span>
+        <!-- ============ TECHNOLOGY ============ -->
+        <section class="tech section" id="technology">
+            <span class="side-label mono"><b>03</b> Technology</span>
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="headline reveal">The stack<br><span class="dim">behind the work.</span></h2>
+                    <div class="tabs reveal" role="tablist" aria-label="Technology categories">
+                        <button role="tab" aria-selected="true" data-tab="lang">Languages</button>
+                        <button role="tab" aria-selected="false" data-tab="ai">AI &amp; Data</button>
+                        <button role="tab" aria-selected="false" data-tab="front">Frontend</button>
+                        <button role="tab" aria-selected="false" data-tab="back">Backend</button>
+                        <button role="tab" aria-selected="false" data-tab="cloud">Cloud &amp; Tools</button>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>MeChat</h3>
-                    <p>A comprehensive, real-time communication application featuring voice calling integrated via
-                        Twilio and media sharing capabilities built on a modern mobile and backend infrastructure.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">React Native</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Prisma</span>
-                        <span class="tech-tag">Twilio</span>
-                    </div>
+                <div class="tech-panels">
+                    <ul class="tech-grid active" data-panel="lang">
+                        <li><i class="devicon-python-plain"></i>Python</li>
+                        <li><i class="devicon-java-plain"></i>Java</li>
+                        <li><i class="devicon-rust-original"></i>Rust</li>
+                        <li><i class="devicon-csharp-plain"></i>C#</li>
+                        <li><i class="devicon-go-original-wordmark"></i>Go</li>
+                        <li><i class="devicon-ballerina-original"></i>Ballerina</li>
+                        <li><i class="devicon-typescript-plain"></i>TypeScript</li>
+                        <li><i class="devicon-javascript-plain"></i>JavaScript</li>
+                        <li><i class="devicon-dart-plain"></i>Dart</li>
+                        <li><i class="devicon-cplusplus-plain"></i>C++</li>
+                        <li><i class="devicon-c-plain"></i>C</li>
+                        <li><i class="devicon-html5-plain"></i>HTML &amp; CSS</li>
+                    </ul>
+                    <ul class="tech-grid" data-panel="ai">
+                        <li><i class="devicon-pytorch-original"></i>PyTorch</li>
+                        <li><i class="devicon-tensorflow-original"></i>TensorFlow</li>
+                        <li><i class="devicon-keras-plain"></i>Keras</li>
+                        <li><i class="devicon-jupyter-plain"></i>Jupyter</li>
+                        <li><i class="devicon-kaggle-original"></i>Kaggle</li>
+                        <li><i class="devicon-python-plain"></i>Brian2</li>
+                        <li><i class="devicon-opencv-plain"></i>OpenCV</li>
+                        <li><i class="fas fa-hand"></i>MediaPipe</li>
+                    </ul>
+                    <ul class="tech-grid" data-panel="front">
+                        <li><i class="devicon-react-original"></i>React</li>
+                        <li><i class="devicon-reactnative-original"></i>React Native</li>
+                        <li><i class="devicon-flutter-plain"></i>Flutter</li>
+                        <li><i class="devicon-electron-original"></i>Electron</li>
+                        <li><i class="devicon-vitejs-plain"></i>Vite</li>
+                        <li><i class="devicon-tailwindcss-original"></i>Tailwind</li>
+                        <li><i class="devicon-dotnetcore-plain"></i>.NET Core</li>
+                    </ul>
+                    <ul class="tech-grid" data-panel="back">
+                        <li><i class="devicon-nodejs-plain"></i>Node.js</li>
+                        <li><i class="devicon-express-original"></i>Express</li>
+                        <li><i class="devicon-spring-original"></i>Spring Boot</li>
+                        <li><i class="devicon-flask-original"></i>Flask</li>
+                        <li><i class="devicon-prisma-original"></i>Prisma</li>
+                        <li><i class="devicon-mongodb-plain"></i>MongoDB</li>
+                        <li><i class="devicon-postgresql-plain"></i>PostgreSQL</li>
+                        <li><i class="devicon-mysql-original"></i>MySQL</li>
+                        <li><i class="devicon-supabase-plain"></i>Supabase</li>
+                        <li><i class="devicon-sqlite-plain"></i>SQLite</li>
+                    </ul>
+                    <ul class="tech-grid" data-panel="cloud">
+                        <li><i class="devicon-googlecloud-plain"></i>Google Cloud</li>
+                        <li><i class="devicon-firebase-plain"></i>Firebase</li>
+                        <li><i class="devicon-vercel-original"></i>Vercel</li>
+                        <li><i class="devicon-cloudflare-plain"></i>Cloudflare</li>
+                        <li><i class="devicon-docker-plain"></i>Docker</li>
+                        <li><i class="devicon-git-plain"></i>Git</li>
+                        <li><i class="devicon-github-original"></i>GitHub</li>
+                        <li><i class="devicon-tomcat-line"></i>Tomcat</li>
+                    </ul>
                 </div>
-
-                <div class="project-card">
-                    <h3>K-Link Platform</h3>
-                    <p>A versatile, multi-functional web platform designed for accurate language translation and
-                        universal file format conversions with an intuitive UI.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Web Dev</span>
-                        <span class="tech-tag">API Integration</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Online Train Booking</h3>
-                    <p>A secure and automated train reservation system featuring an integrated payment gateway and
-                        automated notification pipelines.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Java Spring Boot</span>
-                        <span class="tech-tag">Stripe</span>
-                        <span class="tech-tag">MySQL</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Gesture Laptop Controller</h3>
-                    <p>An innovative accessibility tool utilizing computer vision to map hand tracking and physical
-                        gestures to laptop navigation and media controls.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">MediaPipe</span>
-                        <span class="tech-tag">OpenCV</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Lockdown Browser Installer</h3>
-                    <p>A custom desktop distributable engineered to lock down operating system functions, ensuring a
-                        highly secure environment for online assessments and quizzes.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Electron.js</span>
-                        <span class="tech-tag">Security</span>
-                        <span class="tech-tag">OS Integration</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div style="margin-top: 40px;">
-                <a href="https://github.com/Krishmal2004" target="_blank"
-                    style="color: #00ffd5; text-decoration: none; font-family: 'Open Sans', sans-serif; font-size: 1.2em;">
-                    <i class="fab fa-github"></i> View more on GitHub
-                </a>
             </div>
         </section>
 
-        <section id="blogs">
-            <h2 class="section-title">The "Broadcast" Vibe</h2>
-            <div class="section-subtitle">Transmitting research, tutorials, and security deep-dives</div>
-            <div class="projects-grid">
-                
-                <div class="project-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>OpenChoreo</h3>
-                        <p>The IDP That Finally Gets Kubernetes Right. Exploring automated deployments and streamlined infrastructure management.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">WSO2</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">DevOps</span>
-                            <span class="tech-tag">OpenChoreo</span>
+        <!-- ============ PROJECTS ============ -->
+        <section class="projects" id="projects">
+            <div class="proj-pin" id="proj-pin">
+                <span class="side-label mono"><b>04</b> Projects &amp; proof</span>
+
+                <div class="proj-stage container" id="proj-stage">
+                    <article class="proj active" style="--hue: 210;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <img class="shot shot-d" src="assets/depotops.jpg" alt="SLTB DepotOps home screen" loading="lazy" width="1200" height="750"><img class="shot shot-m" src="assets/depotops-m.jpg" alt="SLTB DepotOps home screen on mobile" loading="lazy" width="390" height="780">
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <a href="https://medium.com/@krishmaldinidu5466/openchoreo-the-idp-that-finally-gets-kubernetes-right-babda5294f3d" target="_blank" style="color: #00ffd5; text-decoration: none; font-family: 'Open Sans', sans-serif; font-size: 1.05em; font-weight: bold; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                            <i class="fas fa-external-link-alt" style="margin-right: 5px;"></i> Read Article
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>WSO2 Devant</h3>
-                        <p>The AI-Native iPaaS That Changes How You Build Intergrations.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">WSO2</span>
-                            <span class="tech-tag">Devant</span>
-                            <span class="tech-tag">DevOps</span>
-                            <span class="tech-tag">iPaaS</span>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">Hackathon · Fleet ops</span>
+                            <h3>SLTB DepotOps</h3>
+                            <p>A real-time fleet breakdown and maintenance tracker for the Sri Lanka Transport Board. Nearly 2,000 of 7,100 buses sit idle at depots, so drivers log breakdowns instantly and depot engineers work from a live, prioritised repair queue.</p>
+                            <ul class="proj-tags mono"><li>React</li><li>Vite</li><li>Express</li><li>PostgreSQL</li><li>JWT</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://public-transport-one.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-right"></i></a><a class="proj-link mono" href="https://github.com/Krishmal2004/Public-Transport" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
                         </div>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <a href="https://medium.com/@krishmaldinidu5466/wso2-devant-the-ai-native-ipaas-that-changes-how-you-build-integrations-0ca41be38628" target="_blank" style="color: #00ffd5; text-decoration: none; font-family: 'Open Sans', sans-serif; font-size: 1.05em; font-weight: bold; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                            <i class="fas fa-external-link-alt" style="margin-right: 5px;"></i> Read Article
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3>WSO2 Micro Integrator</h3>
-                        <p>Solving the Fragmented Systems Problem.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">WSO2</span>
-                            <span class="tech-tag">Micro Integrator</span>
-                            <span class="tech-tag">DevOps</span>
+                    </article>
+                    <article class="proj" style="--hue: 150;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <div class="app">
+                                        <div class="app-bar"><i></i><i></i><i></i><span>certverify.app</span></div>
+                                        <div class="app-body">
+                                            <div class="app-side"><span></span><span></span><span></span><span></span></div>
+                                            <div class="app-main">
+                                                <small>Certificate check</small>
+                                                <b>Signature <em>valid</em> — genuine certificate</b>
+                                                <div class="app-cert"><span></span><span></span><span class="short"></span><i class="fas fa-circle-check"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <a href="https://medium.com/@krishmaldinidu5466/wso2-micro-integrator-solving-the-fragmented-systems-problem-ef6d8f8de533?sharedUserId=krishmaldinidu5466" target="_blank" style="color: #00ffd5; text-decoration: none; font-family: 'Open Sans', sans-serif; font-size: 1.05em; font-weight: bold; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                            <i class="fas fa-external-link-alt" style="margin-right: 5px;"></i> Read Article
-                        </a>
-                    </div>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">Security · Trust</span>
+                            <h3>CertVerifySystem</h3>
+                            <p>Stops fake or altered course certificates from passing as genuine in internship applications. Every certificate is digitally signed at issuance and anyone can verify it through a public flow; any edit invalidates the signature.</p>
+                            <ul class="proj-tags mono"><li>C# / .NET</li><li>Go</li><li>JavaScript</li><li>Docker</li><li>Digital signatures</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://github.com/Krishmal2004/CertVerifySystem" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                    </article>
+                    <article class="proj" style="--hue: 30;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <div class="app">
+                                        <div class="app-bar"><i></i><i></i><i></i><span>barista.ai</span></div>
+                                        <div class="app-body">
+                                            <div class="app-side"><span></span><span></span><span></span><span></span></div>
+                                            <div class="app-main">
+                                                <small>Review sentiment</small>
+                                                <b>Customers are <em>82% positive</em> this week</b>
+                                                <div class="app-bars"><span style="--w:82%"></span><span style="--w:12%"></span><span style="--w:6%"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
+                        </div>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">AI · Sentiment analysis</span>
+                            <h3>Barista Food Chain</h3>
+                            <p>A food-chain management platform with an ML service: an LSTM sentiment model trained on customer reviews plus a chatbot engine, alongside orders, inventory and staff tools on an Express and Supabase backend.</p>
+                            <ul class="proj-tags mono"><li>LSTM / Keras</li><li>Python</li><li>Express</li><li>Supabase</li><li>Docker</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://github.com/Krishmal2004/Barista-Food-Chain" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                    </article>
+                    <article class="proj" style="--hue: 120;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <div class="app">
+                                        <div class="app-bar"><i></i><i></i><i></i><span>wealthwise.app</span></div>
+                                        <div class="app-body">
+                                            <div class="app-side"><span></span><span></span><span></span><span></span></div>
+                                            <div class="app-main">
+                                                <small>AI finance assistant</small>
+                                                <b>Spend smarter with <em>WealthWise</em></b>
+                                                <div class="app-cards"><span></span><span></span><span></span></div><div class="app-chart"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
+                        </div>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">AI · Fintech</span>
+                            <h3>WealthWise</h3>
+                            <p>A full-stack financial analytics app that understands your transactions. Gemini 2.5 powers personalised spending insights and budget forecasts on a real-time dashboard.</p>
+                            <ul class="proj-tags mono"><li>Gemini 2.5</li><li>Java</li><li>JavaScript</li><li>Analytics</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://github.com/Krishmal2004/Ecommerce" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                    </article>
+                    <article class="proj" style="--hue: 190;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <div class="app">
+                                        <div class="app-bar"><i></i><i></i><i></i><span>hospital.integration</span></div>
+                                        <div class="app-body">
+                                            <div class="app-side"><span></span><span></span><span></span><span></span></div>
+                                            <div class="app-main">
+                                                <small>Appointments</small>
+                                                <b>One flow for patients, labs &amp; <em>billing</em></b>
+                                                <div class="app-seats"><span></span><span class="on"></span><span></span><span></span><span class="on"></span><span></span><span></span><span></span><span class="on"></span><span></span><span></span><span></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
+                        </div>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">Integration · Healthcare</span>
+                            <h3>Smart Hospital</h3>
+                            <p>An API-driven integration platform that unifies patient registration, appointments, laboratory, billing and notifications, orchestrated with WSO2 and Ballerina services behind a React dashboard with Asgardeo sign-in.</p>
+                            <ul class="proj-tags mono"><li>Ballerina</li><li>WSO2</li><li>React</li><li>Tailwind</li><li>Docker</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://github.com/Krishmal2004/smart-hospital-intergration" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                    </article>
+                    <article class="proj" style="--hue: 280;">
+                        <div class="device">
+                            <div class="laptop">
+                                <div class="screen">
+                                    <div class="app">
+                                        <div class="app-bar"><i></i><i></i><i></i><span>tui-runner</span></div>
+                                        <div class="app-body">
+                                            <div class="app-side"><span></span><span></span><span></span><span></span></div>
+                                            <div class="app-main">
+                                                <small>Terminal dashboard</small>
+                                                <b>Run every dev process from <em>one screen</em></b>
+                                                <div class="app-term"><span><b>✔</b> backend   ready :8080</span><span><b>✔</b> frontend  ready :5173</span><span><i>●</i> emulator  starting…</span><span class="dim">$ tui-runner dev</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="laptop-base"></div>
+                            </div>
+                        </div>
+                        <div class="proj-info">
+                            <span class="proj-meta mono">Developer tools · CLI</span>
+                            <h3>TUI Runner</h3>
+                            <p>A Rust terminal UI for scaffolding new projects and running multi-process dev environments, with dependency ordering, readiness detection and automatic cleanup of stale ports. Installs with one command on Windows, macOS and Linux.</p>
+                            <ul class="proj-tags mono"><li>Rust</li><li>TUI</li><li>CLI</li><li>Cross-platform</li></ul>
+                            <div class="proj-links"><a class="proj-link mono" href="https://github.com/Krishmal2004/MTR" target="_blank" rel="noopener">Source <i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                    </article>
                 </div>
-        </section>
 
-        <section id="skills">
-            <h2 class="section-title">Core Modules</h2>
-            <div class="section-subtitle">Technical capabilities and expertise</div>
-            <div class="glass-panel">
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 0;">Languages
-                </h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-java"></i></div>
-                        <h4>Java</h4>
+                <div class="proj-controls" id="proj-controls">
+                    <div class="view-toggle" role="group" aria-label="Device preview">
+                        <button type="button" class="on" data-view="desktop"><i class="fas fa-desktop"></i>
+                            Desktop</button>
+                        <button type="button" data-view="mobile"><i class="fas fa-mobile-screen"></i> Mobile</button>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fab fa-python"></i></div>
-                        <h4>Python</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-go-original-wordmark"></i></div>
-                        <h4>Go</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-ballerina-original"></i></div>
-                        <h4>Ballerina</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-javascript-plain"></i></div>
-                        <h4>JavaScript</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-typescript-plain"></i></div>
-                        <h4>TypeScript</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-dart-plain"></i></div>
-                        <h4>Dart</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-cplusplus-plain"></i></div>
-                        <h4>C++</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-c-plain"></i></div>
-                        <h4>C</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-html5-plain"></i></div>
-                        <h4>HTML & CSS</h4>
-                    </div>
-                    
+                    <div class="proj-dots" id="proj-dots"></div>
                 </div>
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 40px;">Frontend & App Dev</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
-                        <h4>React</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-reactnative-original"></i></div>
-                        <h4>React Native</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-reactnative-original"></i></div>
-                        <h4>React Native CLI</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-flutter-plain"></i></div>
-                        <h4>Flutter</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-spring-original"></i></div>
-                        <h4>Spring</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-dotnetcore-plain"></i></div>
-                        <h4>.NET Core</h4>
-                    </div>
-                </div>
+            </div>
 
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 40px;">Backend & Databases</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="fa-brands fa-node-js"></i></div>
-                        <h4>Node.js</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-express-original"></i></div>
-                        <h4>Express.js</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-spring-original colored"></i></div>
-                        <h4>Spring Boot</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-mongodb-plain"></i></div>
-                        <h4>MongoDB</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-mysql-original"></i></div>
-                        <h4>MYSQL</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-postgresql-plain"></i></div>
-                        <h4>PostgreSQL</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-firebase-plain"></i></div>
-                        <h4>Firebase</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-supabase-plain"></i></div>
-                        <h4>Supabase</h4>
-                    </div>
+            <div class="more container">
+                <div class="more-head">
+                    <h2 class="headline reveal">More from<br><span class="dim">the repo shelf.</span></h2>
+                    <a class="pill reveal" href="https://github.com/Krishmal2004?tab=repositories" target="_blank"
+                        rel="noopener"><i class="fab fa-github"></i> All repositories</a>
                 </div>
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 40px;">Data & Machine Learning</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-kaggle-original"></i></div>
-                        <h4>kaggle</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-tensorflow-original"></i></div>
-                        <h4>TensorFlow</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-pytorch-original"></i></div>
-                        <h4>PyTorch</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-python-plain"></i></div>
-                        <h4>Brian2</h4>
-                    </div>
-                </div>
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 40px;">Cloud & Hosting</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-googlecloud-plain"></i></div>
-                        <h4>Google Cloud</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-github-original"></i></div>
-                        <h4>GitHub Pages</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-vercel-plain"></i></div>
-                        <h4>Vercel</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-firebase-plain"></i></div>
-                        <h4>Firebase</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-cloudflare-plain"></i></div>
-                        <h4>Cloudflare</h4>
-                    </div>
-                </div>
-                <h3 style="font-family: 'Open Sans', sans-serif; color: #fff; margin-top: 40px;">Tools & Infrastructure</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-git-plain"></i></div>
-                        <h4>git</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-docker-plain"></i></div>
-                        <h4>Docker</h4>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon"><i class="devicon-tomcat-line"></i></div>
-                        <h4>Apache Tomcat</h4>
-                    </div>
+                <div class="repo-grid">
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/Food-Reservation-App" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>Food Reservation App</h3>
+                        <p>Book tables, pre-order food packages and reserve function halls; restaurant owners manage offerings in real time.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#3178c6"></i>TypeScript</span><span>React Native · Node.js · MongoDB · Stripe</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/MeChat" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>MeChat</h3>
+                        <p>A real-time communication app with voice calling and media sharing on a modern mobile and backend stack.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#3178c6"></i>TypeScript</span><span>React Native · Twilio</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/DevDiary2026" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>DevDiary2026</h3>
+                        <p>A work companion that lives alongside GitHub: a daily diary of commits and PRs, personal todos and email reminders.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#f1e05a"></i>JavaScript</span><span>React · Express · SQLite · VS Code extension</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/React-SEO" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>react-seo</h3>
+                        <p>A composable SEO toolkit for React 19 with component and hook APIs built on one framework-agnostic tag registry.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#3178c6"></i>TypeScript</span><span>React 19 · npm library</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/K-Link" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>K-Link</h3>
+                        <p>Document conversion (PDF, DOCX, XLSX, images) and AI translation powered by Google Gemini.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#3572A5"></i>Python</span><span>Flask · Gemini API · pypdf</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/K-Link_Weather" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>K-Link Weather</h3>
+                        <p>A cross-platform weather app with authentication and user profiles on a Supabase backend.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#00B4AB"></i>Dart</span><span>Flutter · Supabase</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/API_Tester_App" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>API Tester App</h3>
+                        <p>Test and debug HTTP requests from mobile or desktop, with headers, params, JSON formatting and history.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#00B4AB"></i>Dart</span><span>Flutter · REST</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/Train_Booking_System" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>Train Booking System</h3>
+                        <p>Search trains, pick seats, pay and manage reservations, with an admin side for trains and schedules.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#b07219"></i>Java</span><span>Java · HTML · CSS</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/Lock-Down-Browser" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>Lockdown Browser</h3>
+                        <p>A fullscreen kiosk browser for online exams that blocks common escape shortcuts and reports back to the quiz page.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#f1e05a"></i>JavaScript</span><span>Electron · Node.js</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/OmniChannelHub" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>OmniChannelHub</h3>
+                        <p>A WSO2 Micro Integrator project packaged as a Carbon Application, with mock backends and an optional Docker image.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#ef2b3b"></i>WSO2</span><span>WSO2 MI · Maven · Docker</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/House_hold_power_consumption" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>Energy Data Pipeline</h3>
+                        <p>A preprocessing pipeline for energy-consumption datasets: missing values, outliers, feature engineering and scaling.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#DA5B0B"></i>Jupyter</span><span>Python · Machine learning</span></div>
+                    </a>
+                    <a class="repo reveal" href="https://github.com/Krishmal2004/Insta-post-downloder" target="_blank" rel="noopener">
+                        <div class="repo-top"><i class="far fa-folder"></i><i class="fab fa-github"></i></div>
+                        <h3>Insta Post Downloader</h3>
+                        <p>A browser extension for downloading photos and videos from Instagram posts in high resolution.</p>
+                        <div class="repo-foot mono"><span class="lang"><i style="background:#f1e05a"></i>JavaScript</span><span>Browser extension</span></div>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <h2 class="section-title">Neural Interface</h2>
-            <div class="section-subtitle">Establish Connection Protocol</div>
-            <div class="glass-panel contact-container">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p><i class="fas fa-envelope"></i> krishmaldinidu5466@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Pannipitiya, CMB, SL</p>
-                    <p><i class="fas fa-signal"></i> Status: ONLINE</p>
+        <!-- ============ WRITING ============ -->
+        <section class="writing section" id="writing">
+            <span class="side-label mono"><b>05</b> Writing</span>
+            <div class="container">
+                <h2 class="headline reveal">Notes from<br><span class="dim">the field.</span></h2>
+            </div>
 
-                    <div class="social-media-icon" style="margin-top: 20px;">
-                        <a href="https://github.com/Krishmal2004" target="_blank"><i class="fab fa-github"
-                                style="font-size: 1.8em; margin: 0 10px 0 0;"></i></a>
-                        <a href="http://linkedin.com/in/krishmal-dinidu-a933b4349" target="_blank"><i
-                                class="fab fa-linkedin-in" style="font-size: 1.8em; margin: 0 10px;"></i></a>
-                        <a href="http://learn.microsoft.com/en-us/users/krishmal-0570" target="_blank"><i
-                                class="fa-brands fa-microsoft" style="font-size: 1.8em; margin: 0 10px;"></i></a>
-                        <a href="" target="_blank"><i class="fab fa-instagram" style="font-size: 1.8em; margin: 0 10px;"></i></a>
-                    </div>
+            <div class="carousel" id="carousel" aria-roledescription="carousel">
+                <div class="carousel-track">
+                    <a class="c-card" style="--hue: 200;" target="_blank" rel="noopener"
+                        href="https://medium.com/@krishmaldinidu5466/openchoreo-the-idp-that-finally-gets-kubernetes-right-babda5294f3d">
+                        <div class="c-cover"><i class="fas fa-dharmachakra"></i><span class="mono">Kubernetes ·
+                                DevOps</span></div>
+                        <div class="c-body">
+                            <h3>OpenChoreo: The IDP That Finally Gets Kubernetes Right</h3>
+                            <span class="mono">Read on Medium <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <a class="c-card" style="--hue: 355;" target="_blank" rel="noopener"
+                        href="https://medium.com/@krishmaldinidu5466/wso2-devant-the-ai-native-ipaas-that-changes-how-you-build-integrations-0ca41be38628">
+                        <div class="c-cover"><i class="fas fa-diagram-project"></i><span class="mono">WSO2 ·
+                                iPaaS</span></div>
+                        <div class="c-body">
+                            <h3>WSO2 Devant: The AI-Native iPaaS That Changes How You Build Integrations</h3>
+                            <span class="mono">Read on Medium <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <a class="c-card" style="--hue: 30;" target="_blank" rel="noopener"
+                        href="https://medium.com/@krishmaldinidu5466/wso2-micro-integrator-solving-the-fragmented-systems-problem-ef6d8f8de533">
+                        <div class="c-cover"><i class="fas fa-network-wired"></i><span class="mono">WSO2 ·
+                                Integration</span></div>
+                        <div class="c-body">
+                            <h3>WSO2 Micro Integrator: Solving the Fragmented Systems Problem</h3>
+                            <span class="mono">Read on Medium <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <a class="c-card" style="--hue: 0;" target="_blank" rel="noopener"
+                        href="https://medium.com/@krishmaldinidu5466">
+                        <div class="c-cover"><i class="fab fa-medium"></i><span class="mono">All articles</span></div>
+                        <div class="c-body">
+                            <h3>More writing on Medium</h3>
+                            <span class="mono">Open profile <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
                 </div>
-
-                <div>
-                    <div id="form-result"
-                        style="display:none; margin-bottom: 15px; padding: 10px; border-radius: 8px; font-family: 'Open Sans', sans-serif;">
-                    </div>
-                    <form id="contact-form" class="contact-form">
-                        <input type="hidden" name="hidden_timestamp" id="hidden_timestamp">
-                        <input type="hidden" name="hidden_id" id="hidden_id">
-
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-
-                        <button type="submit" id="submitBtn" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Transmit Message
-                        </button>
-                    </form>
+                <div class="carousel-nav">
+                    <button type="button" class="round-btn" id="c-prev" aria-label="Previous article"><i
+                            class="fas fa-arrow-left"></i></button>
+                    <span class="mono" id="c-count">01 / 04</span>
+                    <button type="button" class="round-btn" id="c-next" aria-label="Next article"><i
+                            class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
         </section>
-    </div>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
-        // Preloader and Nav Logic
-        window.onload = function () {
-            setTimeout(function () {
-                const preloader = document.getElementById('preloader');
-                const pageContent = document.getElementById('page-content');
-                preloader.classList.add('hidden');
-                pageContent.classList.add('visible');
-            }, 1500);
-        };
+        <!-- ============ JOURNEY ============ -->
+        <section class="journey section" id="journey">
+            <span class="side-label mono"><b>06</b> Journey</span>
+            <div class="container">
+                <h2 class="headline reveal">The path<br><span class="dim">so far.</span></h2>
+                <ol class="path">
+                    <li class="reveal">
+                        <span class="mono">2024 — Present</span>
+                        <h3>BSc (Hons) Information Technology</h3>
+                        <p>Specialising in Artificial Intelligence</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="mono">2020 — 2024</span>
+                        <h3>G.C.E. Advanced Level</h3>
+                        <p>Ananda College, Colombo 10 · Bio Stream</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="mono">2010 — 2020</span>
+                        <h3>G.C.E. Ordinary Level</h3>
+                        <p>Dharmapala Vidyalaya, Pannipitiya</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.innerWidth > 768) {
-                const links = document.querySelectorAll('.nav-links a');
-                const bubble = document.querySelector('.bubble-effect');
-                let activeLink = document.querySelector('.nav-links a.active');
-                const navLinksContainer = document.querySelector('.nav-links');
-                if (!bubble || !activeLink) return;
+        <!-- ============ CONTACT ============ -->
+        <section class="contact" id="contact">
+            <div class="ribbon" aria-hidden="true">
+                <div class="ribbon-track">
+                    <span>Engineer the future</span><span>AI engineering</span><span>Full-stack apps</span>
+                    <span>Computer vision</span><span>Cybersecurity</span><span>Cloud &amp; DevOps</span>
+                    <span>Engineer the future</span><span>AI engineering</span><span>Full-stack apps</span>
+                    <span>Computer vision</span><span>Cybersecurity</span><span>Cloud &amp; DevOps</span>
+                </div>
+            </div>
 
-                function moveBubble(targetLink) {
-                    const left = targetLink.offsetLeft;
-                    const width = targetLink.offsetWidth;
-                    bubble.style.left = `${left}px`;
-                    bubble.style.width = `${width}px`;
-                }
+            <div class="container contact-inner">
+                <h2 class="contact-title reveal">Let's build together</h2>
 
-                moveBubble(activeLink);
+                <div class="chips reveal">
+                    <a class="chip" href="mailto:krishmaldinidu5466@gmail.com"><i class="fas fa-envelope"></i>
+                        krishmaldinidu5466@gmail.com</a>
+                    <button type="button" class="chip" id="copy-email" data-email="krishmaldinidu5466@gmail.com"><i
+                            class="far fa-copy"></i> Copy email</button>
+                    <span class="chip"><i class="fas fa-location-dot"></i> Pannipitiya, Colombo, Sri Lanka</span>
+                </div>
 
-                links.forEach(link => {
-                    link.addEventListener('mouseenter', () => moveBubble(link));
-                    link.addEventListener('click', function () {
-                        activeLink.classList.remove('active');
-                        this.classList.add('active');
-                        activeLink = this;
-                    });
-                });
+                <ul class="socials reveal">
+                    <li><a href="https://github.com/Krishmal2004" target="_blank" rel="noopener" aria-label="GitHub"><i
+                                class="fab fa-github"></i></a></li>
+                    <li><a href="https://linkedin.com/in/krishmal-dinidu-a933b4349" target="_blank" rel="noopener"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="https://medium.com/@krishmaldinidu5466" target="_blank" rel="noopener"
+                            aria-label="Medium"><i class="fab fa-medium"></i></a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/users/krishmal-0570" target="_blank" rel="noopener"
+                            aria-label="Microsoft Learn"><i class="fab fa-microsoft"></i></a></li>
+                </ul>
 
-                navLinksContainer.addEventListener('mouseleave', () => moveBubble(activeLink));
-            }
-        });
+                <form class="form reveal" id="contact-form" novalidate>
+                    <p class="form-title mono">Or send a message</p>
+                    <input type="hidden" name="hidden_timestamp" id="hidden_timestamp">
+                    <input type="hidden" name="hidden_id" id="hidden_id">
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="Name" aria-label="Name" autocomplete="name"
+                            required>
+                        <input type="email" name="email" placeholder="Email" aria-label="Email"
+                            autocomplete="email" required>
+                    </div>
+                    <input type="text" name="subject" placeholder="Subject" aria-label="Subject" required>
+                    <textarea name="message" rows="4" placeholder="Tell me about your idea…" aria-label="Message"
+                        required></textarea>
+                    <div class="form-foot">
+                        <p class="result mono" id="form-result" role="status" aria-live="polite"></p>
+                        <button type="submit" class="send" id="submitBtn"><span>Send message</span> <i
+                                class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
 
-        // EmailJS Implementation
-        (function () {
-            emailjs.init("zL7dP-8yzWJMUEDQ-");
-        })();
+            <div class="giant" aria-hidden="true">KRISHMAL</div>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const contactForm = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submitBtn');
-            const formResult = document.getElementById('form-result');
+            <footer class="footer container mono">
+                <span>© <span id="year">2026</span> Krishmal Dinidu</span>
+                <span>Past versions <a href="../V1.0/index.html">1.0</a> <a href="../V2.0/index.html">2.0</a></span>
+            </footer>
+        </section>
+    </main>
 
-            if (contactForm) {
-                contactForm.addEventListener('submit', function (event) {
-                    event.preventDefault();
+    <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-                    document.getElementById('hidden_timestamp').value = new Date().toLocaleString();
-                    document.getElementById('hidden_id').value = 'BT24-' + Math.random().toString(36).substring(2, 9).toUpperCase();
-
-                    const originalBtnText = submitBtn.innerHTML;
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transmitting...';
-
-                    emailjs.sendForm('service_pvsqtdk', 'template_1fjcepl', this)
-                        .then(function () {
-                            formResult.textContent = 'Connection Established. Data Sent Successfully.';
-                            formResult.style.display = 'block';
-                            formResult.style.backgroundColor = 'rgba(0, 255, 102, 0.2)';
-                            formResult.style.border = '1px solid #00ff66';
-                            formResult.style.color = '#00ff66';
-                            contactForm.reset();
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                        }, function (error) {
-                            console.error("EmailJS Error Details:", error);
-                            formResult.textContent = 'Error: Transmission Failed.';
-                            formResult.style.display = 'block';
-                            formResult.style.backgroundColor = 'rgba(255, 51, 51, 0.2)';
-                            formResult.style.border = '1px solid #ff3333';
-                            formResult.style.color = '#ff3333';
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                        });
-                });
-            }
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
